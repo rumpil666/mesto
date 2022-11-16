@@ -13,6 +13,12 @@
   line-height: 17px;
 }
 
+.popup__field:first-child {
+  margin-bottom: 30px;
+}
+
+
+
 @media screen and (max-width: 640px) {
   .popup__field {
     max-width: 238px;

@@ -1,9 +1,0 @@
-.popup__field_about-me {
-  margin-bottom: 48px;
-}
-
-@media screen and (max-width: 640px) {
-  .popup__field_about-me {
-    margin-bottom: 45px;
-  }
-}

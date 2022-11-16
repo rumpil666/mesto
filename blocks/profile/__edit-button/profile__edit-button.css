@@ -22,7 +22,7 @@
     width: 18px;
     height: 18px;
     justify-self: center;
-    align-self: center;
+    align-self: end;
     margin-right: 16px;
   }
 }

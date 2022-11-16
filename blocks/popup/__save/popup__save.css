@@ -10,6 +10,8 @@
   text-align: center;
   transition: 0.5s;
   border-radius: 2px;
+  margin-bottom: 37px;
+  margin-top: 48px;
 }
 
 .popup__save:hover {
@@ -22,5 +24,7 @@
     line-height: 17px;
     width: 238px;
     height: 46px;
+    margin-top: 45px;
+    margin-bottom: 25px;
   }
 }

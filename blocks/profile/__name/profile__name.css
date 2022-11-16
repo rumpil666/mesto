@@ -9,6 +9,9 @@
   font-size: 42px;
   line-height: 48px;
   grid-area: one;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 650px) {
