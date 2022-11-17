@@ -2,16 +2,16 @@
   box-sizing: border-box;
   display: grid;
   grid-template-areas: "one three" "two two";
-  gap: 16px 18px;
+  gap: 7px 18px;
   max-width: 336px;
   width: 100%;
   margin-left: 30px;
+  padding: 0;
 }
 
 @media screen and (max-width: 650px) {
   .profile__grid {
     margin: 22.25px auto 0;
-    padding: 0;
     gap: 14px 10px;
     width: 282px;
   }

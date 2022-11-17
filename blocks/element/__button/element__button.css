@@ -9,6 +9,7 @@
   height: 19px;
   object-fit: contain;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .element__button:hover {

@@ -3,7 +3,6 @@
   padding: 0;
   margin: 0;
   max-width: 336px;
-  max-height: 18px;
   color: #fff;
   font-weight: 400;
   font-size: 18px;
@@ -17,9 +16,7 @@
 @media screen and (max-width: 650px) {
   .profile__about-me {
     width: 282px;
-    max-height: 14px;
     font-size: 14px;
-    line-height: 17px;
     text-align: center;
     margin: 0 auto;
   }
