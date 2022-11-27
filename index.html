@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
+  <script src="./scripts/index.js" type="module"></script>
 </head>
 
 <body class="page">
@@ -22,11 +23,11 @@
         <img class="profile__avatar" src="./images/image.jpg" alt="Жак-Ив Кусто">
         <div class="profile__grid">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button" type="button"></button>
+          <button class="profile__edit-button" aria-label="Open" type="button"></button>
           <p class="profile__about-me">Исследователь океана</p>
         </div>
       </div>
-      <button type="button" class="profile__add-button"></button>
+      <button type="button" class="profile__add-button" aria-label="Open"></button>
     </section>
 
     <section class="elements" aria-label="Карточки с интересными местами в России">
@@ -42,11 +43,11 @@
 
   <section class="popup popup_name">
     <div class="popup__container">
-      <button class="popup__close" type="button"></button>
+      <button class="popup__close" type="button" aria-label="Close"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="edit-profile">
-        <input class="popup__field popup__field_type_name" type="text">
-        <input class="popup__field popup__field_type_about-me" type="text">
+      <form class="popup__form popup__form_type_name" name="edit-profile">
+        <input class="popup__field popup__field_type_name" type="text" placeholder="Имя" required="Поле обязательно для ввода">
+        <input class="popup__field popup__field_type_about-me" type="text" placeholder="О себе" required="Поле обязательно для ввода">
         <input class="popup__save" type="submit" value="Сохранить">
       </form>
     </div>
@@ -54,11 +55,11 @@
 
   <section class="popup popup_card">
     <div class="popup__container">
-      <button class="popup__close" type="button"></button>
+      <button class="popup__close" type="button" aria-label="Close"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form popup__form_type_new-card" name="new-card">
-        <input class="popup__field popup__field_type_title" type="text" placeholder="Название">
-        <input class="popup__field popup__field_type_link" type="text" placeholder="Ссылка на изображение">
+        <input class="popup__field popup__field_type_title" type="text" placeholder="Название" required="Поле обязательно для ввода">
+        <input class="popup__field popup__field_type_link" type="url" placeholder="Ссылка на изображение" required="Поле обязательно для ввода">
         <input class="popup__save" type="submit" value="Создать">
       </form>
     </div>
@@ -67,22 +68,22 @@
 
   <section class="popup popup_zoom-img">
     <div class="popup__column">
-      <button class="popup__close" type="button"></button>
-      <img class="popup__img" src="." alt="">
+      <button class="popup__close" type="button" aria-label="Close"></button>
+      <img class="popup__img" src="#" alt="">
       <h2 class="popup__subtitle"></h2>
     </div>
   </section>
 
 
-  <script src="./scripts/index.js" type="module"></script>
+
 
   <template id="card-template">
     <li class="element">
-      <button class="element__delete" type="button"></button>
-      <img class="element__item" src="." alt="">
+      <button class="element__delete" type="button" aria-label="Delete"></button>
+      <img class="element__item" src="#" alt="">
       <div class="element__group">
         <h2 class="element__title"></h2>
-        <button class="element__like" type="button"></button>
+        <button class="element__like" type="button" aria-label="Like"></button>
       </div>
     </li>
   </template>

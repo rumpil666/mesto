@@ -12,6 +12,7 @@
   height: 32px;
   object-fit: contain;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .popup__close:hover {
