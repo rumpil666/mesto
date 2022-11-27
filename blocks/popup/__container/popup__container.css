@@ -1,8 +1,9 @@
 .popup__container {
-  margin: auto;
+  position: fixed;
   background-color: #fff;
   border-radius: 10px;
-  width: 430px;
+  max-width: 430px;
+  width: 100%;
 }
 
 @media screen and (max-width: 640px) {

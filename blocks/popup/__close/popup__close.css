@@ -1,7 +1,7 @@
 .popup__close {
-  position: relative;
+  position: absolute;
   top: -40px;
-  right: -438px;
+  right: -40px;
   border: 0;
   margin: 0;
   padding: 0;
@@ -20,8 +20,8 @@
 
 @media screen and (max-width: 640px) {
   .popup__close {
-    top: -48px;
-    right: -262px;
+    top: -36px;
+    right: 0px;
     background-image: url(../../../images/Close\ Icon_mobile.svg);
     width: 20px;
     height: 20px;
