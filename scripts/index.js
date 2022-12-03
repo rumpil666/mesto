@@ -14,9 +14,9 @@ const popupCloseButtonZoomImage = popupZoomImage.querySelector('.popup__close');
 
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__about-me');
-const formPopup = document.querySelector('.popup__form_type_name');
-const nameInput = formPopup.querySelector('.popup__field_type_name');
-const jobInput = formPopup.querySelector('.popup__field_type_about-me');
+const formEditProfile = document.querySelector('.popup__form_type_name');
+const nameInput = formEditProfile.querySelector('.popup__field_type_name');
+const jobInput = formEditProfile.querySelector('.popup__field_type_about-me');
 
 //Функция открытия попапа
 const openPopup = function (popup) {
@@ -59,7 +59,7 @@ popupCloseButtonZoomImage.addEventListener('click', function () {
   closePopup(popupZoomImage);
 });
 
-formPopup.addEventListener('submit', formNameSubmitHandler);
+formEditProfile.addEventListener('submit', formNameSubmitHandler);
 
 
 
@@ -127,7 +127,7 @@ initialCards.forEach(function (item) {
   renderCard(item, cardList)
 });
 
-const formHandleCardSubmit = (evt) => {
+const handleFormCardSubmit = (evt) => {
   evt.preventDefault()
 
   // здесь мы сами создаем объект, который будем передавать в renderCard
@@ -145,4 +145,4 @@ const formHandleCardSubmit = (evt) => {
 }
 
 
-formCard.addEventListener('submit', formHandleCardSubmit)
+formCard.addEventListener('submit', handleFormCardSubmit)
