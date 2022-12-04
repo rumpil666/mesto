@@ -15,8 +15,8 @@ const popupCloseButtonZoomImage = popupZoomImage.querySelector('.popup__close');
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__about-me');
 const formEditProfile = document.querySelector('.popup__form_type_name');
-const nameInput = formEditProfile.querySelector('.popup__field_type_name');
-const jobInput = formEditProfile.querySelector('.popup__field_type_about-me');
+const nameInput = formEditProfile.querySelector('.popup__input_type_name');
+const jobInput = formEditProfile.querySelector('.popup__input_type_about-me');
 
 //Функция открытия попапа
 const openPopup = function (popup) {
@@ -59,20 +59,39 @@ popupCloseButtonZoomImage.addEventListener('click', function () {
   closePopup(popupZoomImage);
 });
 
+
+const closePopupByClickOnOverlay = function (event) {
+  if (event.target !== event.currentTarget) {
+    return;
+  }
+  event.target.classList.remove('popup_opened');
+}
+
+//Функция для закрытия попапа по нажатию 'Esc'
+const closePopupByClickEsc = function (event) {
+  if (event.key === 'Escape') {
+    closePopup(popupName);
+    closePopup(popupCard);
+    closePopup(popupZoomImage);
+  }
+}
+
+//Закрытие попапа по нажатию 'Esc'
+document.addEventListener('keydown', closePopupByClickEsc);
+
+popupName.addEventListener('click', closePopupByClickOnOverlay);
+popupCard.addEventListener('click', closePopupByClickOnOverlay);
+popupZoomImage.addEventListener('click', closePopupByClickOnOverlay);
+
+
 formEditProfile.addEventListener('submit', formNameSubmitHandler);
-
-
-
-
-
-
 
 const cardList = document.querySelector('.elements__list');
 const cardTemplate =
   document.querySelector('#card-template').content.querySelector('.element');
 const formCard = document.querySelector('.popup__form_type_new-card');
-const titleInput = document.querySelector('.popup__field_type_title');
-const linkInput = document.querySelector('.popup__field_type_link');
+const titleInput = document.querySelector('.popup__input_type_title');
+const linkInput = document.querySelector('.popup__input_type_link');
 
 //Функия для создания новых карточек
 function createElement(item) {
@@ -143,6 +162,7 @@ const handleFormCardSubmit = (evt) => {
   titleInput.value = '';
   linkInput.value = '';
 }
+
 
 
 formCard.addEventListener('submit', handleFormCardSubmit)
