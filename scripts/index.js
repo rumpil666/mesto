@@ -16,11 +16,13 @@ const jobInput = formEditProfile.querySelector('.popup__input_type_about-me');
 //Функция открытия попапа
 const openPopup = function (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByClickEsc);
 }
 
 //Функция заполнения поля информации введными данными
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByClickEsc);
 }
 
 const handleProfileFormSubmit = function (e) {
@@ -63,9 +65,6 @@ const closePopupByClickEsc = function (event) {
     closePopup(openedPopup);
   }
 }
-
-//Закрытие попапа по нажатию 'Esc'
-document.addEventListener('keydown', closePopupByClickEsc);
 
 
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);
