@@ -7,14 +7,9 @@ const popupZoomImage = document.querySelector('.popup_zoom-img');
 const popupOpenButtonName = document.querySelector('.profile__edit-button');
 const popupOpenButtonCard = document.querySelector('.profile__add-button');
 
-const popupCloseButtonName = popupName.querySelector('.popup__close');
-const popupCloseButtonCard = popupCard.querySelector('.popup__close');
-const popupCloseButtonZoomImage = popupZoomImage.querySelector('.popup__close');
-
-
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__about-me');
-const formEditProfile = document.querySelector('.popup__form_type_name');
+const formEditProfile = document.forms['edit-profile'];
 const nameInput = formEditProfile.querySelector('.popup__input_type_name');
 const jobInput = formEditProfile.querySelector('.popup__input_type_about-me');
 
@@ -28,7 +23,7 @@ const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
 }
 
-const formNameSubmitHandler = function (e) {
+const handleProfileFormSubmit = function (e) {
   e.preventDefault();
 
   nameProfile.textContent = nameInput.value;
@@ -47,49 +42,38 @@ popupOpenButtonCard.addEventListener('click', function () {
   openPopup(popupCard);
 });
 
+const popups = document.querySelectorAll('.popup')
 
-//Зактрие popup
-popupCloseButtonName.addEventListener('click', function () {
-  closePopup(popupName);
-});
-popupCloseButtonCard.addEventListener('click', function () {
-  closePopup(popupCard);
-});
-popupCloseButtonZoomImage.addEventListener('click', function () {
-  closePopup(popupZoomImage);
-});
-
-
-const closePopupByClickOnOverlay = function (event) {
-  if (event.target !== event.currentTarget) {
-    return;
-  }
-  event.target.classList.remove('popup_opened');
-}
+//универсальная функция закрытия попапов по нажатию на кнопку закрытия и оверлей
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup_opened')) {
+          closePopup(popup)
+      }
+      if (evt.target.classList.contains('popup__close')) {
+        closePopup(popup)
+      }
+    })
+})
 
 //Функция для закрытия попапа по нажатию 'Esc'
 const closePopupByClickEsc = function (event) {
   if (event.key === 'Escape') {
-    closePopup(popupName);
-    closePopup(popupCard);
-    closePopup(popupZoomImage);
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
 }
 
 //Закрытие попапа по нажатию 'Esc'
 document.addEventListener('keydown', closePopupByClickEsc);
 
-popupName.addEventListener('click', closePopupByClickOnOverlay);
-popupCard.addEventListener('click', closePopupByClickOnOverlay);
-popupZoomImage.addEventListener('click', closePopupByClickOnOverlay);
 
-
-formEditProfile.addEventListener('submit', formNameSubmitHandler);
+formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
 const cardList = document.querySelector('.elements__list');
 const cardTemplate =
   document.querySelector('#card-template').content.querySelector('.element');
-const formCard = document.querySelector('.popup__form_type_new-card');
+const formCard = document.forms['new-card'];
 const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 
@@ -104,7 +88,7 @@ function createElement(item) {
   //Обработчик кликов для кнопок лайка, удаления и открытия попапа увеличения картинки.
   cardDeleteButton.addEventListener('click', handleDeleteButtonClick);
   cardLikeButton.addEventListener('click', handleLikeButtonClick);
-  cardImg.addEventListener('click', handleImgClick);
+  cardImg.addEventListener('click', () => handleImgClick(item));
 
   //Присваивание карточкам ссылки альта и текста из имеющихся у нас данных
   cardTitle.textContent = item.name;
@@ -128,11 +112,11 @@ const handleDeleteButtonClick = (evt) => {
 const popupImg = document.querySelector('.popup__img');
 const popupSubtitle = document.querySelector('.popup__subtitle');
 
-function handleImgClick(evt) {
+function handleImgClick(item) {
   openPopup(popupZoomImage);
-  popupImg.src = evt.target.src;
-  popupImg.alt = evt.target.alt;
-  popupSubtitle.textContent = evt.target.alt;
+  popupImg.src = item.link
+  popupImg.alt = item.name;
+  popupSubtitle.textContent = item.name;
 }
 
 //Функция генерации новых карточек
@@ -159,8 +143,7 @@ const handleFormCardSubmit = (evt) => {
 
   closePopup(popupCard);
 
-  titleInput.value = '';
-  linkInput.value = '';
+  evt.target.reset()
 }
 
 
