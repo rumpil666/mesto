@@ -1,26 +1,15 @@
-const settings = {
-  popupForm : '.popup__form',
-  inputErrorClass : 'popup__input_type_error',
-  inputErrorActive : 'popup__input-error_active',
-  formInput : '.popup__input',
-  formSave : '.popup__save',
-  classButton: 'button_inactive',
-};
-
-
-
 //Функция проверки на валидность всех форм
-const enableValidation = () => {
+const enableValidation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.popupForm));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(settings, formElement);
   });
 };
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (settings, formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(settings.inputErrorClass);
   errorElement.textContent = errorMessage;
@@ -28,7 +17,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 };
 
 //Функция снятия ошибки
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (settings, formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(settings.inputErrorClass);
   errorElement.classList.remove(settings.inputErrorActive);
@@ -36,42 +25,44 @@ const hideInputError = (formElement, inputElement) => {
 };
 
 //Функция активации и деактивации кнопки отправки формы в зависимости от валидности полей
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (settings, inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(settings.classButton);
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove(settings.classButton);
+    buttonElement.disabled = false;
   }
 };
 
 //Функция добавления всем необходимым полям стилей кнопок
-const setEventListeners = (formElement) => {
+const setEventListeners = (settings, formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(settings.formInput));
   const buttonElement = formElement.querySelector(settings.formSave);
 
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(settings, inputList, buttonElement);
+  formElement.addEventListener('reset', () => {
+    setTimeout(() => {
+      toggleButtonState(settings, inputList, buttonElement);
+    }, 0);
+  });
 
   inputList.forEach((inputElement) => {
-
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-      formElement.addEventListener('reset', () => {
-        setTimeout(() => {
-          toggleButtonState(inputList, buttonElement);
-        }, 0);
+      checkInputValidity(settings, formElement, inputElement);
+      toggleButtonState(settings, inputList, buttonElement);
       });
-    });
+
 
   });
 };
 
 //Функция валидации форм
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (settings, formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(settings, formElement, inputElement, inputElement.validationMessage);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(settings, formElement, inputElement);
   }
 };
 
@@ -82,4 +73,11 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-enableValidation();
+enableValidation({
+  popupForm : '.popup__form',
+  inputErrorClass : 'popup__input_type_error',
+  inputErrorActive : 'popup__input-error_active',
+  formInput : '.popup__input',
+  formSave : '.popup__save',
+  classButton: 'button_inactive',
+});
