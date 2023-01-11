@@ -1,4 +1,7 @@
-import initialCards from "./date.js";
+import Card from "./Card.js";
+import { initialCards, settings } from "./date.js";
+import FormValidator from "./FormValidator.js";
+
 
 const popupName = document.querySelector('.popup_name');
 const popupCard = document.querySelector('.popup_card');
@@ -40,6 +43,7 @@ popupOpenButtonName.addEventListener('click', function () {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 });
+
 popupOpenButtonCard.addEventListener('click', function () {
   openPopup(popupCard);
 });
@@ -70,52 +74,30 @@ const closePopupByClickEsc = function (event) {
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
 const cardList = document.querySelector('.elements__list');
-const cardTemplate =
-  document.querySelector('#card-template').content.querySelector('.element');
 const formCard = document.forms['new-card'];
 const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 
 //Функия для создания новых карточек
 function createElement(item) {
-  const card = cardTemplate.cloneNode(true);
-  const cardTitle = card.querySelector('.element__title');
-  const cardImg = card.querySelector('img');
-  const cardDeleteButton = card.querySelector('.element__delete');
-  const cardLikeButton = card.querySelector('.element__like');
+  const card = new Card(item, '#card-template', handleImgClick);
+  const cardElement = card.generateCard();
 
-  //Обработчик кликов для кнопок лайка, удаления и открытия попапа увеличения картинки.
-  cardDeleteButton.addEventListener('click', handleDeleteButtonClick);
-  cardLikeButton.addEventListener('click', handleLikeButtonClick);
-  cardImg.addEventListener('click', () => handleImgClick(item));
-
-  //Присваивание карточкам ссылки альта и текста из имеющихся у нас данных
-  cardTitle.textContent = item.name;
-  cardImg.src = item.link;
-  cardImg.alt = item.name;
-
-  return card;
+  return cardElement;
 }
 
-//Функция для нажатия лайка
-const handleLikeButtonClick = (evt) => {
-  evt.target.classList.toggle('element__like_active');
-}
 
-//Функция для удаления карточки
-const handleDeleteButtonClick = (evt) => {
-  evt.target.closest('.element').remove();
-}
+
 
 // Элементы и функция для работы всплывания попапа
 const popupImg = document.querySelector('.popup__img');
 const popupSubtitle = document.querySelector('.popup__subtitle');
 
-function handleImgClick(item) {
+function handleImgClick(img, name) {
   openPopup(popupZoomImage);
-  popupImg.src = item.link
-  popupImg.alt = item.name;
-  popupSubtitle.textContent = item.name;
+  popupImg.src = img;
+  popupImg.alt = name;
+  popupSubtitle.textContent = name;
 }
 
 //Функция генерации новых карточек
@@ -145,6 +127,8 @@ const handleFormCardSubmit = (evt) => {
   evt.target.reset()
 }
 
-
-
 formCard.addEventListener('submit', handleFormCardSubmit)
+
+
+const formAddNewCardValidator = new FormValidator(settings, popupCard);
+formAddNewCardValidator.enableValidation();
