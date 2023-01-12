@@ -40,7 +40,7 @@ _hasInvalidInput () {
 
 
 //Функция активации и деактивации кнопки отправки формы в зависимости от валидности полей
-toggleButtonState() {
+_toggleButtonState() {
   if (this._hasInvalidInput()) {
     this._buttonElement.classList.add(this._settings.classButton);
     this._buttonElement.disabled = true;
@@ -50,15 +50,24 @@ toggleButtonState() {
   }
 };
 
+resetValidation() {
+
+  this._inputList.forEach((inputElement) => {
+    this._hideInputError(inputElement)
+  });
+
+  this._toggleButtonState();
+}
+
 //Функция исполнения обработчиков
 _setEventListeners() {
 
-  this.toggleButtonState();
+  this._toggleButtonState();
 
   this._inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       this._checkInputValidity(inputElement);
-      this.toggleButtonState();
+      this._toggleButtonState();
       });
   });
 
@@ -66,11 +75,11 @@ _setEventListeners() {
     event.preventDefault();
   });
 
-  this._formElement.addEventListener('reset', () => {
-    setTimeout(() => {
-      this.toggleButtonState();
-    }, 0);
-  });
+  // this._formElement.addEventListener('reset', () => {
+  //   setTimeout(() => {
+  //     this.toggleButtonState();
+  //   }, 0);
+  // });
 
 };
 

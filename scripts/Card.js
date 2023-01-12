@@ -20,7 +20,7 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
 
-    this._image = this._element.querySelector('img');//может быть ошибка в классе
+    this._image = this._element.querySelector('.element__item');
 
     this._likeButton = this._element.querySelector('.element__like');
     this._deleteButtonn = this._element.querySelector('.element__delete');

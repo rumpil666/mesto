@@ -39,12 +39,14 @@ const handleProfileFormSubmit = function (e) {
 
 // Открытие Popup
 popupOpenButtonName.addEventListener('click', function () {
-  openPopup(popupName);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
+  formNameInfoValidator.resetValidation();
+  openPopup(popupName);
 });
 
 popupOpenButtonCard.addEventListener('click', function () {
+  formAddNewCardValidator.resetValidation();
   openPopup(popupCard);
 });
 
@@ -94,10 +96,10 @@ const popupImg = document.querySelector('.popup__img');
 const popupSubtitle = document.querySelector('.popup__subtitle');
 
 function handleImgClick(img, name) {
-  openPopup(popupZoomImage);
   popupImg.src = img;
   popupImg.alt = name;
   popupSubtitle.textContent = name;
+  openPopup(popupZoomImage);
 }
 
 //Функция генерации новых карточек
@@ -129,6 +131,8 @@ const handleFormCardSubmit = (evt) => {
 
 formCard.addEventListener('submit', handleFormCardSubmit)
 
-
+const formNameInfoValidator = new FormValidator(settings, popupName);
 const formAddNewCardValidator = new FormValidator(settings, popupCard);
+
+formNameInfoValidator.enableValidation();
 formAddNewCardValidator.enableValidation();
