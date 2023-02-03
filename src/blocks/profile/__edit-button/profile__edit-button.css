@@ -5,7 +5,7 @@
   padding: 0;
   outline: none;
   background-color: transparent;
-  background-image: url(../../../images/Edit\ Button.svg);
+  background-image: url(../../../images/EditButton.svg);
   width: 24px;
   height: 24px;
   grid-area: three;
@@ -19,7 +19,7 @@
 
 @media screen and (max-width: 650px) {
   .profile__edit-button {
-    background-image: url(../../../images/Edit\ Button_mobile.svg);
+    background-image: url(../../../images/EditButton2.svg);
     width: 18px;
     height: 18px;
     margin: 0 16px 6px 0;

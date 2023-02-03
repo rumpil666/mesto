@@ -6,7 +6,7 @@ export default class FormValidator {
     this._buttonElement = this._formElement.querySelector(this._settings.formSave);
   }
 
-// Добавления класса ошибки
+
 _showInputError(inputElement, errorMessage) {
   const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(this._settings.inputErrorClass);
@@ -14,7 +14,7 @@ _showInputError(inputElement, errorMessage) {
   errorElement.classList.add(this._settings.inputErrorActive);
 };
 
-//Удаление класса ошибки
+
 _hideInputError(inputElement) {
   const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(this._settings.inputErrorClass);
@@ -22,7 +22,6 @@ _hideInputError(inputElement) {
   errorElement.textContent = '';
 };
 
-//Добавление или удаление текста ошибки
 _checkInputValidity(inputElement) {
   if (!inputElement.validity.valid) {
     this._showInputError(inputElement, inputElement.validationMessage);
@@ -31,7 +30,7 @@ _checkInputValidity(inputElement) {
   }
 };
 
-//Функция находит невалидные поля
+
 _hasInvalidInput () {
   return this._inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -39,7 +38,7 @@ _hasInvalidInput () {
 };
 
 
-//Функция активации и деактивации кнопки отправки формы в зависимости от валидности полей
+
 _toggleButtonState() {
   if (this._hasInvalidInput()) {
     this._buttonElement.classList.add(this._settings.classButton);
@@ -50,6 +49,7 @@ _toggleButtonState() {
   }
 };
 
+
 resetValidation() {
 
   this._inputList.forEach((inputElement) => {
@@ -59,7 +59,7 @@ resetValidation() {
   this._toggleButtonState();
 }
 
-//Функция исполнения обработчиков
+
 _setEventListeners() {
 
   this._toggleButtonState();
@@ -74,13 +74,6 @@ _setEventListeners() {
   this._formElement.addEventListener('submit', (event) => {
     event.preventDefault();
   });
-
-  // this._formElement.addEventListener('reset', () => {
-  //   setTimeout(() => {
-  //     this.toggleButtonState();
-  //   }, 0);
-  // });
-
 };
 
 enableValidation() {

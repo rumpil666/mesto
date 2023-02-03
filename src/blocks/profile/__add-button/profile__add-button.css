@@ -5,7 +5,7 @@
   padding: 0;
   outline: none;
   background-color: transparent;
-  background-image: url(../../../images/Add\ Button.svg);
+  background-image: url(../../../images/AddButton2.svg);
   width: 150px;
   height: 50px;
   transition: 0.5s;
@@ -18,7 +18,7 @@
 
 @media screen and (max-width: 650px) {
   .profile__add-button {
-    background-image: url(../../../images/Add\ Button_mobile.svg);
+    background-image: url(../../../images/AddButton.svg);
     width: 282px;
     margin: 36px auto 0;
   }
