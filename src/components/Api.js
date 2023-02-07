@@ -31,7 +31,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data.username,
-        about: data.job  //проверить если не работает
+        about: data.job
       })
     })
       .then(res => this._analysisResponse(res));
