@@ -15,7 +15,7 @@ import Api from "../components/Api.js";
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-59',
   headers: {
-    // authorization: 'ea831264-f2d6-4316-98fa-307058f19068',
+    authorization: '1e9d1083-106c-4496-b210-76f261e591ba',
     'Content-Type': 'application/json'
   }
 });
