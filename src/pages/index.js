@@ -32,6 +32,14 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     console.log(`Ошибка: ${err}`);
   });
 
+// _____________Профиль пользователя_____________
+
+const userInfo = new UserInfo({
+  username: '.profile__name',
+  job: '.profile__about-me',
+  avatar: '.profile__avatar'
+});
+
 // _____________Функция для добавления новых карточек_____________
 const createCard = (data) => {
   const card = new Card({
@@ -86,13 +94,7 @@ const cardsList = new Section({
 }, '.elements__list');
 
 
-// _____________Профиль пользователя_____________
 
-const userInfo = new UserInfo({
-  username: '.profile__name',
-  job: '.profile__about-me',
-  avatar: '.profile__avatar'
-});
 
 // _____________Попап редактирования профиля_____________
 const popupName = new PopupWithForm({
@@ -121,10 +123,12 @@ function fillInNameFormInputs({ username, job }) {
 
 
 popupOpenButtonName.addEventListener('click', () => {
-  popupName.open();
   const info = userInfo.getUserInfo();
-  fillInNameFormInputs({ username: info.username, job: info.job });
-  formNameInfoValidator.resetValidation();
+  fillInNameFormInputs({
+    username: info.username,
+    job: info.job
+  });
+  popupName.open();
 })
 
 // _____________Попап добавления карточки_____________
