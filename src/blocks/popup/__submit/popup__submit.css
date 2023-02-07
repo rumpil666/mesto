@@ -1,4 +1,4 @@
-.popup__save {
+.popup__submit {
   all: unset;
   background-color: black;
   color: #fff;
@@ -9,18 +9,17 @@
   line-height: 22px;
   text-align: center;
   border-radius: 2px;
-  margin-bottom: 37px;
-  margin-top: 48px;
+  padding: 0;
+  margin: 31px 0 0;
   cursor: pointer;
 }
 
 @media screen and (max-width: 640px) {
-  .popup__save {
+  .popup__submit {
     font-size: 14px;
     line-height: 17px;
     width: 238px;
     height: 46px;
-    margin-top: 45px;
-    margin-bottom: 25px;
+    margin-top: 20px;
   }
 }

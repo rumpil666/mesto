@@ -3,7 +3,7 @@ export default class FormValidator {
     this._settings = settings;
     this._formElement = formElement;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.formInput));
-    this._buttonElement = this._formElement.querySelector(this._settings.formSave);
+    this._buttonElement = this._formElement.querySelector(this._settings.formSubmit);
   }
 
 
@@ -69,10 +69,6 @@ _setEventListeners() {
       this._checkInputValidity(inputElement);
       this._toggleButtonState();
       });
-  });
-
-  this._formElement.addEventListener('submit', (event) => {
-    event.preventDefault();
   });
 };
 
