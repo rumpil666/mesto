@@ -29,7 +29,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     cardsList.renderItems(initialCards);
   })
   .catch((err) => {
-    console.log(err);
+    console.log(`Ошибка: ${err}`);
   });
 
 // _____________Функция для добавления новых карточек_____________
