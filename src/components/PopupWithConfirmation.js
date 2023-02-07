@@ -3,7 +3,7 @@ import Popup from "./Popup";
 export default class PopupWithConfirmation extends Popup {
   constructor({ popupSelector }) {
     super(popupSelector);
-    this._form = this._popup.querySelector('.popup__form_type_delete-card');
+    this._form = this._popup.querySelector('.popup__form');
   }
 
   submitCallback(removing) {
@@ -13,9 +13,9 @@ export default class PopupWithConfirmation extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListenet('click', (e) => {
-      preventDefault(e);
-      this._handleSubmit;
+    this._form.addEventListener('click', (e) => {
+      e.preventDefault();
+      this._handleSubmit();
     })
   }
 }

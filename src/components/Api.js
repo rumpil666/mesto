@@ -15,7 +15,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
     })
-    .then(res => this._analysisResponse(res));
+      .then(res => this._analysisResponse(res));
   }
 
   getUserInfo() {
@@ -32,6 +32,17 @@ export default class Api {
       body: JSON.stringify({
         name: data.username,
         about: data.job
+      })
+    })
+      .then(res => this._analysisResponse(res));
+  }
+
+  editAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar
       })
     })
       .then(res => this._analysisResponse(res));
@@ -69,17 +80,6 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
-    })
-      .then(res => this._analysisResponse(res));
-  }
-
-  editAvatar(data) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: data.avatar
-      })
     })
       .then(res => this._analysisResponse(res));
   }

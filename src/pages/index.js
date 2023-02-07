@@ -44,7 +44,7 @@ const userInfo = new UserInfo({
 const createCard = (data) => {
   const card = new Card({
     data: data,
-    templateSelector: '#card-template',
+    templateSelector: '.template-selector',
     userId: userId,
     handlCardClick: (name, link) => {
       viewImagePopup.open(name, link);
@@ -54,7 +54,7 @@ const createCard = (data) => {
       confirmationPopup.submitCallback(() => {
         api.deleteCard(cardId)
           .then(() => {
-            confirmationPopup.close;
+            confirmationPopup.close();
             card.deleteCard();
           })
           .catch((err) => {
@@ -87,7 +87,6 @@ const createCard = (data) => {
 
 // _____________Создание Section_____________
 const cardsList = new Section({
-  items: initialCards,
   renderer: (card) => {
     cardsList.addItem(createCard(card));
   },
@@ -99,21 +98,21 @@ const cardsList = new Section({
 // _____________Попап редактирования профиля_____________
 const popupName = new PopupWithForm({
   popupSelector: '.popup_name',
-  handleFormSubmit: (formData) => {
-    popupName.loading(true);
-    api.editUserInfo(formData)
-      .then((formData) => {
-        userInfo.setUserInfo(formData);
+  handleFormSubmit: (data) => {
+    popupName.renderLoading(true);
+    api.editUserInfo(data)
+      .then((data) => {
+        userInfo.setUserInfo(data);
         popupName.close();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка: ${err}`);
       })
       .finally(() => {
-        popupName.loading(false);
+        popupName.renderLoading(false);
       });
-  },
-})
+  }
+});
 popupName.setEventListeners();
 
 function fillInNameFormInputs({ username, job }) {
@@ -134,21 +133,21 @@ popupOpenButtonName.addEventListener('click', () => {
 // _____________Попап добавления карточки_____________
 const popupCard = new PopupWithForm({
   popupSelector: '.popup_card',
-  handleFormSubmit: (formCard) => {
-    popupCard.loading(true);
-    api.addNewCard(formCard)
-      .then((formCard) => {
-        cardsList.addItem(createCard(formCard));
+  handleFormSubmit: (data) => {
+    popupCard.renderLoading(true);
+    api.addNewCard(data)
+      .then((data) => {
+        cardsList.addItem(createCard(data));
         popupCard.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        popupCard.loading(false);
+        popupCard.renderLoading(false);
       });
-  },
-})
+  }
+});
 popupCard.setEventListeners();
 
 popupOpenButtonCard.addEventListener('click', () => {
@@ -159,30 +158,33 @@ popupOpenButtonCard.addEventListener('click', () => {
 // _____________Попап изменение аватара_____________
 const popupAvatar = new PopupWithForm({
   popupSelector: '.popup_avatar',
-  handleFormSubmit: (formData) => {
-    popupAvatar.loading(true);
-    api.editAvatar(formData)
-      .then((formData) => {
-        avatar.src = formData.avatar;
+  handleFormSubmit: (data) => {
+    popupAvatar.renderLoading(true);
+    api.editAvatar(data)
+      .then((data) => {
+        avatar.src = data.avatar;
         popupAvatar.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        popupAvatar.loading(false);
+        popupAvatar.renderLoading(false);
       });
   },
 })
-popupAvatar.setEventListeners();
+
 
 popupBtnAvatar.addEventListener('click', () => {
   formAvatarValidator.resetValidation();
   popupAvatar.open();
 })
+popupAvatar.setEventListeners();
 
 // _____________Попап подтверждения удаления_____________
-const confirmationPopup = new PopupWithConfirmation('.element__delete');
+const confirmationPopup = new PopupWithConfirmation({
+  popupSelector: '.popup_delete-card'
+});
 confirmationPopup.setEventListeners();
 
 // _____________Попап отображения карточки_____________
@@ -191,7 +193,7 @@ viewImagePopup.setEventListeners();
 
 
 
-cardsList.renderItems();
+
 
 // _____________Валидация форм_____________
 const formNameInfoValidator = new FormValidator(settings, formEditProfile);

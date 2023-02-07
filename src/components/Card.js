@@ -2,8 +2,8 @@ export default class Card {
   constructor({data, templateSelector, userId, handlCardClick, handleDeleteBtnClick, handleSetLikes, handleRemoveLikes }) {
     this._name = data.name;
     this._link = data.link;
-    this._cardId = data._id;
     this._userId = userId;
+    this._cardId = data._id;
     this._likes = data.likes;
     this._cardOwnerId = data.owner._id;
     this._templateSelector = templateSelector;
@@ -35,10 +35,10 @@ export default class Card {
     this._image.src = this._link;
     this._image.alt = this._name;
     this._element.querySelector('.element__title').textContent = this._name;
-    this._likesNumber = this._likes.length;
+    this._likesNumber.textContent = this._likes.length;
 
-    this._hasDeleteButton;
-    this._isCardLiked;
+    this._hasDeleteButton();
+    this._isCardLiked();
     this._setEventListeners();
 
     return this._element;
@@ -46,8 +46,8 @@ export default class Card {
 
   _isCardLiked() {
     if (this._likes.some((user) => {
-      return this._userId = user._id;
-    } )) {
+      return this._userId === user._id;
+    })) {
       this._likeButton.classList.add('element__like_active');
     }
   }
@@ -58,7 +58,7 @@ export default class Card {
     this._likeButton.classList.toggle('element__like_active')
   }
 
-  _deleteCard() {
+  deleteCard() {
     this._element.remove();
     this._element = null;
   }
@@ -71,18 +71,16 @@ export default class Card {
 
   _setEventListeners() {
     this._image.addEventListener('click', () => {
-      this._handleCardClick(this._link, this._name);
-    });
-
+      this._handleCardClick(this._name, this._link);
+    })
     this._deleteButton.addEventListener('click', () => {
       this._handleDeleteBtnClick(this._cardId);
-    });
-
+    })
     this._likeButton.addEventListener('click', () => {
       if (this._likeButton.classList.contains('element__like_active')) {
-        this._handleRemoveLikes(userId);
-      } {
-        this._handleSetLikes(userId);
+        this._handleRemoveLikes(this._cardId);
+      } else {
+        this._handleSetLikes(this._cardId);
       }
     });
   }
