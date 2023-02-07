@@ -70,7 +70,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(res => this._analysisResponse(res));
+      .then(res => this._analysisResponse(res));
   }
 
   editAvatar(data) {
@@ -81,7 +81,7 @@ export default class Api {
         avatar: data.avatar
       })
     })
-    .then(res => this._analysisResponse(res));
+      .then(res => this._analysisResponse(res));
   }
 }
 
