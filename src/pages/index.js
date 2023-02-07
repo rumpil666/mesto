@@ -7,9 +7,9 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithConfirmation from '../components/PopupWithConfirmation';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import FormValidator from "../components/FormValidator.js";
-import Api from '../components/Api';
+import Api from '../components/Api.js';
 
 // _____________API_____________
 const api = new Api({
