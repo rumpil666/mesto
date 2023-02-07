@@ -8,8 +8,8 @@ export default class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
-    };
+    return Promise.reject(`Ошибка: ${res.status}`)
+  }
 
   getInitialCards() {
     return fetch (`${this._baseUrl}/cards`, {
@@ -20,10 +20,9 @@ export default class Api {
 
   getUserInfo() {
     return fetch (`${this._baseUrl}/users/me`, {
-      method: 'PATCH',
-      headers: this._headers,
+      headers: this._headers
     })
-    .then(res => this._analysisResponse(res));
+      .then(res => this._analysisResponse(res));
   }
 
   editUserInfo(data) {
@@ -35,7 +34,7 @@ export default class Api {
         about: data.job  //проверить если не работает
       })
     })
-    .then(res => this._analysisResponse(res));
+      .then(res => this._analysisResponse(res));
   }
 
   addNewCard(data) {
@@ -47,7 +46,7 @@ export default class Api {
         link: data.link
       })
     })
-    .then(res => this._analysisResponse(res));
+      .then(res => this._analysisResponse(res));
   }
 
   deleteCard(cardId) {
@@ -55,7 +54,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(res => this._analysisResponse(res));
+      .then(res => this._analysisResponse(res));
   }
 
   setLike(cardId) {
@@ -63,7 +62,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     })
-    .then(res => this._analysisResponse(res));
+      .then(res => this._analysisResponse(res));
   }
 
   deleteLike(cardId) {
@@ -84,13 +83,5 @@ export default class Api {
     })
     .then(res => this._analysisResponse(res));
   }
-  // другие методы работы с API
 }
 
-// const api = new Api({
-//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-59',
-//   headers: {
-//     authorization: 'ea831264-f2d6-4316-98fa-307058f19068',
-//     'Content-Type': 'application/json'
-//   }
-// });
