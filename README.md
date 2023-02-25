@@ -9,17 +9,17 @@
 -Семантические теги
 
 ### CSS
--Flexbox
--Grid Layout
--БЭЬ Nested
--Псевдоклассы CSS
+- Flexbox
+- Grid Layout
+- BEM Nested
+- Псевдоклассы CSS
 ### JavaScript
--Валидация форм
--Всплывающие окна с формой(popup)
--Асинхронный код
--ООП
--Webpack
--API подключенный к серверу [Яндекс.Практикум](https://practicum.yandex.ru/)
+- Валидация форм
+- Всплывающие окна с формой(popup)
+- Асинхронный код
+- ООП
+- Webpack
+- API подключенный к серверу [Яндекс.Практикум](https://practicum.yandex.ru/)
 
 ## Ссылка на проект:
 [Проект на GitHub Pages](https://rumpil666.github.io/mesto/)
